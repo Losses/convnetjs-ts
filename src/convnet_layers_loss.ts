@@ -82,7 +82,7 @@ export class SoftmaxLayer extends LayerBase implements ILayer {
         const result = -Math.log(this.es[y]);
 
         // loss is the class negative log likelihood
-        return Number.isNaN(result) ? 0 : isNaN;
+        return Number.isNaN(result) ? 0 : result;
     }
     getParamsAndGrads(): ParamsAndGrads[] {
         return [];

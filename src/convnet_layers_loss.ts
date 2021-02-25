@@ -79,8 +79,10 @@ export class SoftmaxLayer extends LayerBase implements ILayer {
             x.dw[i] = mul;
         }
 
+        const result = -Math.log(this.es[y]);
+
         // loss is the class negative log likelihood
-        return -Math.log(this.es[y]);
+        return Number.isNaN(result) ? 0 : isNaN;
     }
     getParamsAndGrads(): ParamsAndGrads[] {
         return [];
@@ -158,7 +160,7 @@ export class RegressionLayer extends LayerBase implements ILayer {
             const i = y.dim;
             const yi = y.val;
             const dy = x.w[i] - yi;
-            x.dw[i] = dy;
+            x.dw[i] = Number.isNaN(dy) ? 0 : dy;
             loss += 0.5 * dy * dy;
         }
         return loss;
